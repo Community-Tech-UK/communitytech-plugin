@@ -4,7 +4,7 @@ Tags: elementor, mcp, automation, rest-api, workflow
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,10 @@ All endpoints require authentication (Application Passwords or cookie auth).
 * `GET  /wp-json/communitytech/v1/elementor/kit/css-variables` — CSS variable map (read-only)
 
 == Changelog ==
+
+= 1.0.1 =
+* Fix plugin and author URIs to communitytech.co.uk.
+* Add GitHub-based auto-updates via plugin-update-checker.
 
 = 1.0.0 =
 * Initial release.
