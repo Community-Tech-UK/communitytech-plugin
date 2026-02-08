@@ -4,7 +4,7 @@ Tags: elementor, mcp, automation, rest-api, workflow
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,8 @@ CommunityTech Workflow is a modular companion plugin that bridges WordPress/Elem
 **Current Modules:**
 
 * **Elementor Kit Settings** — Exposes global colors, typography, and theme style via REST API endpoints, enabling programmatic read/write of the Elementor design system.
+* **Elementor CSS Manager** — Regenerate Elementor CSS files after programmatic page data updates.
+* **Elementor Widget Registry** — Discover all registered widgets, their controls, content fields, and categories via REST API.
 
 The plugin uses an auto-discovery module system. Drop a new module folder into `includes/modules/` and it will be picked up automatically.
 
@@ -42,7 +44,21 @@ All endpoints require authentication (Application Passwords or cookie auth).
 * `POST /wp-json/communitytech/v1/elementor/kit/theme-style`  — Update theme style
 * `GET  /wp-json/communitytech/v1/elementor/kit/css-variables` — CSS variable map (read-only)
 
+= Elementor CSS =
+
+* `POST /wp-json/communitytech/v1/elementor/css/regenerate`    — Regenerate CSS for a page (requires post_id)
+
+= Elementor Widgets =
+
+* `GET  /wp-json/communitytech/v1/elementor/widgets`            — List all registered widgets
+* `GET  /wp-json/communitytech/v1/elementor/widgets/categories` — Widget categories with counts
+* `GET  /wp-json/communitytech/v1/elementor/widgets/<name>`     — Single widget detail with controls
+
 == Changelog ==
+
+= 1.1.0 =
+* New: Elementor Widget Registry module — discover all registered widgets, controls, and content fields via REST API.
+* Fix: CSS regeneration endpoint — use correct `get_path()` method instead of non-existent `get_file_path()`.
 
 = 1.0.2 =
 * Tested up to WordPress 6.9.

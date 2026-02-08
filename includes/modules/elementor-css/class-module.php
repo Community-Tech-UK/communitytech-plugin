@@ -130,9 +130,10 @@ class CommunityTech_Module_Elementor_Css extends CommunityTech_Module_Base {
 			$css_file->update();
 
 			// Get info about the generated file.
-			$css_file_path = $css_file->get_file_path();
-			$css_file_url  = $css_file->get_url();
-			$css_file_time = file_exists( $css_file_path ) ? filemtime( $css_file_path ) : null;
+			// Note: Elementor\Core\Files\Base uses get_path() and get_url(), not get_file_path().
+			$css_file_path = method_exists( $css_file, 'get_path' ) ? $css_file->get_path() : null;
+			$css_file_url  = method_exists( $css_file, 'get_url' ) ? $css_file->get_url() : null;
+			$css_file_time = ( $css_file_path && file_exists( $css_file_path ) ) ? filemtime( $css_file_path ) : null;
 
 			return new WP_REST_Response( [
 				'success'     => true,
