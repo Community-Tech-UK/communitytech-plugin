@@ -3,7 +3,7 @@
  * Plugin Name: CommunityTech Workflow
  * Plugin URI:  https://communitytech.co.uk
  * Description: Companion plugin for CommunityTech automation — exposes REST API endpoints for MCP integrations, Elementor global settings, and future workflow tooling.
- * Version:     1.0.1
+ * Version:     1.0.2
  * Author:      CommunityTech
  * Author URI:  https://communitytech.co.uk
  * License:     GPL-2.0-or-later
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'COMMUNITYTECH_VERSION', '1.0.1' );
+define( 'COMMUNITYTECH_VERSION', '1.0.2' );
 define( 'COMMUNITYTECH_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'COMMUNITYTECH_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'COMMUNITYTECH_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
