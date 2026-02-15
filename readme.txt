@@ -4,7 +4,7 @@ Tags: elementor, mcp, automation, rest-api, workflow
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 1.1.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,8 @@ CommunityTech Workflow is a modular companion plugin that bridges WordPress/Elem
 * **Elementor Kit Settings** — Exposes global colors, typography, and theme style via REST API endpoints, enabling programmatic read/write of the Elementor design system.
 * **Elementor CSS Manager** — Regenerate Elementor CSS files after programmatic page data updates.
 * **Elementor Widget Registry** — Discover all registered widgets, their controls, content fields, and categories via REST API.
+* **SiteSEO** — Read and update SEO metadata per post/page, audit SEO completeness across the site, and read global SiteSEO settings.
+* **Elementor Render Rebuild** — Force Elementor to rebuild rendered HTML (post_content) after programmatic data updates via REST API.
 
 The plugin uses an auto-discovery module system. Drop a new module folder into `includes/modules/` and it will be picked up automatically.
 
@@ -54,7 +56,24 @@ All endpoints require authentication (Application Passwords or cookie auth).
 * `GET  /wp-json/communitytech/v1/elementor/widgets/categories` — Widget categories with counts
 * `GET  /wp-json/communitytech/v1/elementor/widgets/<name>`     — Single widget detail with controls
 
+= SiteSEO =
+
+* `GET  /wp-json/communitytech/v1/siteseo/post/<id>`    — Get all SEO meta for a post/page
+* `POST /wp-json/communitytech/v1/siteseo/post/<id>`    — Update SEO meta for a post/page
+* `GET  /wp-json/communitytech/v1/siteseo/audit`        — Audit SEO completeness across posts
+* `GET  /wp-json/communitytech/v1/siteseo/settings`     — Read global SiteSEO configuration
+
+= Elementor Render =
+
+* `POST /wp-json/communitytech/v1/elementor/render/rebuild` — Rebuild rendered HTML for a page (requires post_id)
+
 == Changelog ==
+
+= 1.3.0 =
+* New: Elementor Render Rebuild module — force Elementor to rebuild rendered HTML (post_content) after programmatic _elementor_data updates via REST API.
+
+= 1.2.0 =
+* New: SiteSEO module — read/update per-post SEO metadata, audit SEO completeness across the site, and read global SiteSEO settings.
 
 = 1.1.0 =
 * New: Elementor Widget Registry module — discover all registered widgets, controls, and content fields via REST API.
