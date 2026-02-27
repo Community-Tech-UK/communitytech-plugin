@@ -48,6 +48,26 @@ class CommunityTech_Module_Wp_Options extends CommunityTech_Module_Base {
 	// -------------------------------------------------------------------------
 
 	public function register_rest_routes(): void {
+		register_rest_route( self::REST_NAMESPACE, '/options/search', [
+			'methods'             => 'GET',
+			'callback'            => [ $this, 'search_options' ],
+			'permission_callback' => [ $this, 'check_permissions' ],
+			'args'                => [
+				'pattern' => [
+					'required'          => true,
+					'type'              => 'string',
+					'description'       => 'SQL LIKE pattern to search option names (e.g. "elementor%license%").',
+					'sanitize_callback' => 'sanitize_text_field',
+				],
+				'limit' => [
+					'required'          => false,
+					'type'              => 'integer',
+					'default'           => 50,
+					'sanitize_callback' => 'absint',
+				],
+			],
+		] );
+
 		register_rest_route( self::REST_NAMESPACE, '/options', [
 			[
 				'methods'             => 'GET',
@@ -101,6 +121,32 @@ class CommunityTech_Module_Wp_Options extends CommunityTech_Module_Base {
 	// -------------------------------------------------------------------------
 	//  Endpoint Callbacks
 	// -------------------------------------------------------------------------
+
+	/**
+	 * GET /options/search?pattern=elementor%25license%25
+	 */
+	public function search_options( WP_REST_Request $request ): WP_REST_Response {
+		global $wpdb;
+
+		$pattern = $request->get_param( 'pattern' );
+		$limit   = min( $request->get_param( 'limit' ), 200 );
+
+		$rows = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT option_name, LEFT(option_value, 200) AS option_value FROM {$wpdb->options} WHERE option_name LIKE %s ORDER BY option_name LIMIT %d",
+				$pattern,
+				$limit
+			),
+			ARRAY_A
+		);
+
+		$result = [];
+		foreach ( $rows as $row ) {
+			$result[ $row['option_name'] ] = $row['option_value'];
+		}
+
+		return new WP_REST_Response( $result, 200 );
+	}
 
 	/**
 	 * GET /options?names=opt1,opt2
