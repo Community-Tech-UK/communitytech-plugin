@@ -4,7 +4,7 @@ Tags: elementor, mcp, automation, rest-api, workflow
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,7 @@ CommunityTech Workflow is a modular companion plugin that bridges WordPress/Elem
 * **Elementor Widget Registry** — Discover all registered widgets, their controls, content fields, and categories via REST API.
 * **SiteSEO** — Read and update SEO metadata per post/page, audit SEO completeness across the site, and read global SiteSEO settings.
 * **Elementor Render Rebuild** — Force Elementor to rebuild rendered HTML (post_content) after programmatic data updates via REST API.
+* **WP Options** — Read, update, and delete wp_options entries via REST API (admin only).
 
 The plugin uses an auto-discovery module system. Drop a new module folder into `includes/modules/` and it will be picked up automatically.
 
@@ -67,7 +68,16 @@ All endpoints require authentication (Application Passwords or cookie auth).
 
 * `POST /wp-json/communitytech/v1/elementor/render/rebuild` — Rebuild rendered HTML for a page (requires post_id)
 
+= WP Options =
+
+* `GET    /wp-json/communitytech/v1/options?names=opt1,opt2` — Read options
+* `POST   /wp-json/communitytech/v1/options`                 — Update options (body: `{"options":{"key":"value"}}`)
+* `DELETE /wp-json/communitytech/v1/options`                  — Delete options (body: `{"names":["opt1","opt2"]}`)
+
 == Changelog ==
+
+= 1.4.0 =
+* New: WP Options module — read, update, and delete wp_options entries via REST API. Restricted to administrators.
 
 = 1.3.0 =
 * New: Elementor Render Rebuild module — force Elementor to rebuild rendered HTML (post_content) after programmatic _elementor_data updates via REST API.
