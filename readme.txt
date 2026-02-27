@@ -4,7 +4,7 @@ Tags: elementor, mcp, automation, rest-api, workflow
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,9 @@ All endpoints require authentication (Application Passwords or cookie auth).
 * `DELETE /wp-json/communitytech/v1/options`                  — Delete options (body: `{"names":["opt1","opt2"]}`)
 
 == Changelog ==
+
+= 1.4.1 =
+* Add: Option search endpoint (GET /options/search?pattern=...) for querying wp_options by LIKE pattern.
 
 = 1.4.0 =
 * New: WP Options module — read, update, and delete wp_options entries via REST API. Restricted to administrators.
